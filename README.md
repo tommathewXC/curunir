@@ -1,5 +1,6 @@
 # curunir
-A simple websocket Implementation in Rust
+A simple websocket Implementation in Rust. The eventual goal of this project is to have a Rust library that implements
+a simple single-threaded server, and a statically defined client. 
 
 ## Dev System
 
