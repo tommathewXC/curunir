@@ -5,7 +5,8 @@ use std::str;
 pub struct Client{
     address: String,
     port: u16,
-    endpoint: String
+    endpoint: String,
+    key: String
 }
 
 impl Client {
@@ -14,7 +15,8 @@ impl Client {
         Client{
             address: format!( "{}", address ),
             port: port,
-            endpoint: format!("{}", endpoint )
+            endpoint: format!("{}", endpoint ),
+            key: String::from("dGhlIHNhbXBsZSBub25jZQ==")
         }
     }
 
@@ -70,7 +72,7 @@ impl Client {
         let url = format!( "{}:{}", self.address, self.port );
         match TcpStream::connect( url ) {
             Ok(mut stream) => {
-                let shake = Client::handshake( &mut stream, &self.address, &self.port, &self.endpoint );
+                let shake = Client::handshake( &mut stream, &self.address, &self.port, &self.endpoint, &self.key );
                 match shake {
                     Ok(_) => {
                         Client::start( &mut stream );
@@ -120,17 +122,18 @@ impl Client {
     fn handshake( stream : &mut std::net::TcpStream, 
         address: &String, 
         port: &u16, 
-        endpoint: &String ) -> std::result::Result< usize, std::io::Error> {
+        endpoint: &String,
+        key: &String ) -> std::result::Result< usize, std::io::Error> {
             
         let mut get = format!("GET /{} HTTP/1.1\n", endpoint );
         get = format!("{}Host: {}:{}\n", get, address, port );
+        get = format!("{}Sec-WebSocket-Key: {}\n", get, key );
         let headers = [
             "Upgrade: websocket",
             "Connection: Upgrade",
             "Origin: CurunirClient",
             "Sec-WebSocket-Protocol: chat, superchat",
             "Sec-WebSocket-Version: 13",
-            "Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==",
             "Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits",
             "Accept-Encoding: gzip, deflate, br",
             "Pragma: no-cache",
