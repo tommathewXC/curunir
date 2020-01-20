@@ -13,10 +13,10 @@ class EchoWebSocket(tornado.websocket.WebSocketHandler):
 
     def open(self):
         print("WebSocket opened", self.request.remote_ip )
-        self.write_message(u"Hello this is the welcome message")
+        self.write_message(u"Hi I'm server")
 
     def on_message(self, message):
-        self.write_message(u"You said: " + message)
+        print( f"Got message: {message}")
 
     def on_close(self):
         print("WebSocket closed")
