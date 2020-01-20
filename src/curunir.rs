@@ -117,7 +117,11 @@ impl Client {
         }
     }
 
-    fn handshake( stream : &mut std::net::TcpStream, address: &String, port: &u16, endpoint: &String ) -> std::result::Result< usize, std::io::Error> {
+    fn handshake( stream : &mut std::net::TcpStream, 
+        address: &String, 
+        port: &u16, 
+        endpoint: &String ) -> std::result::Result< usize, std::io::Error> {
+            
         let mut get = format!("GET /{} HTTP/1.1\n", endpoint );
         get = format!("{}Host: {}:{}\n", get, address, port );
         let headers = [
