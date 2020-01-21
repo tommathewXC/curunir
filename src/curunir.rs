@@ -4,6 +4,19 @@ use std::str;
 
 const WSKEY: &str = "dGhlIHNhbXBsZSBub25jZQ==";
 
+/**
+ * WebSocket client
+ * ==
+ * 
+ * @params     &str    address     Address of the server.
+ * 
+ * @params     u16     port        Port of the target server.
+ * 
+ * @params     &str    endpoint    Address of the server.alloc
+ * 
+ * @returns    Client  An instance of the client struct
+ * 
+ */
 pub struct Client{
     address: String,
     port: u16,
@@ -12,18 +25,6 @@ pub struct Client{
 
 impl Client {
 
-    /**
-     *  Create a new WebSocket client
-     *  ---
-     * 
-     *  @params     &str    address     Address of the server.
-     * 
-     *  @params     u16     port        Port of the target server.
-     * 
-     *  @params     &str    endpoint    Address of the server
-     * 
-     *  @returns    Client  An instance of the client struct
-     */
     pub fn new(address: &str, port: u16, endpoint: &str ) -> Client {
         Client{
             address: format!( "{}", address ),
@@ -186,7 +187,7 @@ impl Client {
             payload.extend(vec![  (raw.len() as u8) ]);
         }else{
             // @todo: implement this! 
-            
+
             let len = raw.len() as u8;
             if raw.len() <= 65535 {
                 let left : u8 = (len >> 4) & 0x0f; 

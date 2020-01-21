@@ -2,15 +2,12 @@
 A simple websocket Implementation in Rust. The eventual goal of this project is to have a Rust library that implements
 a simple single-threaded server, and a statically defined client. 
 
-## Dev System
 
-OS: Ubuntu, Docker
+# Usage
 
-## Testing
+    mod curunir;
 
-
-### Client
-
-1. Start tornado websocket server
-2. run curunir
-
+    fn main() {
+        let client = curunir::Client::new( "localhost", 5555, "endpoint" ); // connect to ws://localhost:5555/endpoint
+        client.connect();
+    }
