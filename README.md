@@ -25,4 +25,4 @@ a simple single-threaded server, and a statically defined client.
 
 # Reference
 
-The WebSocket Protocl [RFC6455](https://tools.ietf.org/html/rfc6455)
+The WebSocket Protocol Standard [RFC6455](https://tools.ietf.org/html/rfc6455)
